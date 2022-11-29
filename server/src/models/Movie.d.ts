@@ -1,8 +1,9 @@
-export type TMovieKey = keyof Omit<Movie, 'id'>;
+export type TMovieKey = keyof Omit<Movie, 'id' | 'imageUrl' | 'date'>;
 
 export type Movie = {
   id: string;
   title: string;
   description: string;
-  year: number;
+  imageUrl: string;
+  date: Date;
 };

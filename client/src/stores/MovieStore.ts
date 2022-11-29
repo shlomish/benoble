@@ -1,15 +1,15 @@
 import { Movie } from '../typing';
-import axios from 'axios';
+import { observable } from 'mobx';
 
 export default class MovieStore {
-  movies: Movie[];
+  @observable movies: Movie[];
 
   constructor(initialMovies?: Movie[]) {
     this.movies = initialMovies || [];
   }
 
   search = async (query: string) => {
-    console.log('Searching...');
+    if (query === '') return;
     const res = await fetch(`api/movie/${query}`);
     const newMovies = await res.json();
     this.movies = (newMovies as Array<any>).map(this.movieAdapter);
@@ -17,8 +17,10 @@ export default class MovieStore {
   };
 
   private movieAdapter = (data: any): Movie => ({
+    id: data.id,
+    date: new Date(data.date),
     title: data?.title,
     description: data?.description,
-    imgUrl: data?.imgUrl,
+    imageUrl: data?.imageUrl,
   });
 }

@@ -23,7 +23,7 @@ export const MovieItem = (props: MovieItemProps) => {
   const { movie } = props;
   return (
     <Wrapper>
-      <Image src={movie?.imgUrl} />
+      <Image src={movie?.imageUrl} />
       <Title>{movie?.title}</Title>
       <Description>{movie?.description}</Description>
     </Wrapper>

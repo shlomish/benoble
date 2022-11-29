@@ -14,15 +14,8 @@ moviesRouter.get('/:query', async (req: Request, res: Response) => {
   if (cacheResults.length > 0) {
     res.status(HttpStatusCode.OK).send(cacheResults);
   } else {
-    // TODO: Call to API
-    const results: Movie[] = [];
-    res.status(HttpStatusCode.OK).send([
-      {
-        title: 'This guy',
-        description: 'Is a great actor',
-        imgUrl:
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Tom_Hanks_2016.jpg/800px-Tom_Hanks_2016.jpg',
-      },
-    ]);
+    const results: Movie[] = await MovieService.getMovies(query);
+    cache.set(results);
+    res.status(HttpStatusCode.OK).send(results);
   }
 });

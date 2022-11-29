@@ -1,5 +1,7 @@
 export type Movie = {
+  id: string;
   title: string;
   description: string;
-  imgUrl: string;
+  imageUrl: string;
+  date: Date;
 };

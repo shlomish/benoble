@@ -2,23 +2,17 @@ import React from 'react';
 import { MovieListProps } from './typing';
 import { MovieItem } from '../MovieItem';
 import { Movie } from '../../typing';
+import { observer } from 'mobx-react';
 
-export const MovieList = (props: MovieListProps) => {
+export const MovieList = observer((props: MovieListProps) => {
   const { data } = props;
-
+  console.log('data');
+  console.log(data);
   return (
     <div>
       {data?.map((x) => (
-        <MovieItem
-          key={x.title}
-          movie={{
-            title: 'This guy',
-            description: 'Is a great actor',
-            imgUrl:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Tom_Hanks_2016.jpg/800px-Tom_Hanks_2016.jpg',
-          }}
-        />
+        <MovieItem key={x.title} movie={x} />
       ))}
     </div>
   );
-};
+});
